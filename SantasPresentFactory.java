@@ -20,15 +20,17 @@ public class SantasPresentFactory {
         presents.put("Bicycle", 0);
 
         while (!materials.isEmpty() && !magicValues.isEmpty()) {
+            if (materials.peek() == 0 || magicValues.peek() == 0) {
+                if (materials.peek() == 0) {
+                    materials.pop();
+                }
+                if (magicValues.peek() == 0) {
+                    magicValues.poll();
+                }
+                continue;
+            }
             int result = materials.peek() * magicValues.peek();
-            if (materials.peek() == 0 && magicValues.peek() == 0) {
-                materials.pop();
-                magicValues.poll();
-            } else if (materials.peek() == 0) {
-                materials.pop();
-            } else if (magicValues.peek() == 0) {
-                magicValues.poll();
-            } else if (result == 150) {
+            if (result == 150) {
                 int current = presents.get("Doll");
                 presents.put("Doll", current + 1);
                 materials.pop();
